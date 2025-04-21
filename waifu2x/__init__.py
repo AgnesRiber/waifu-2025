@@ -4,9 +4,11 @@ implementation in Chainer, a deep learning framework, uses neural networks
 to perform the image enhancement tasks.
 """
 
+import os
 import sys
 import time
 import argparse
+import subprocess
 import numpy as np
 from PIL import Image
 from pathlib import Path
@@ -18,13 +20,31 @@ from waifu2x import iproc, reconstruct, srcnn, utils
 
 THISDIR = Path(__file__).resolve().parent
 
-# ruff: noqa: T201
-
 
 def main() -> None:
 	"""Run the program, from the main entry point."""
+	adjust_mingw32ccompilers()
 	run()
 
+def adjust_mingw32ccompilers():
+    """Adjusts mingw32ccompiler.py for compatibility and installs necessary dependencies."""
+    file_path = os.path.join(np.__path__[0], 'distutils', 'mingw32ccompiler.py')
+    try:
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+        with open(file_path, 'w') as file:
+            for line in lines:
+                if 'from distutils.msvccompiler import get_build_version' in line:
+                    file.write('# ' + line)  # Comment the line out
+                else:
+                    file.write(line)
+        print("Arquivo mingw32ccompiler.py modificado com sucesso!")
+    except Exception as e:
+        print(f"Aviso: Não foi possível modificar o arquivo: {str(e)}")
+
+    # Install OpenCV (headless version for fewer dependency issues)
+    subprocess.run(['pip', 'install', 'opencv-python-headless'])
+    subprocess.run(['python', '-m', 'cupyx.tools.install_library', '--library', 'cudnn', '--cuda', '12.x'])
 
 def denoise_image(
 	args: argparse.Namespace,
