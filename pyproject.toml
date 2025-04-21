@@ -17,9 +17,9 @@ classifiers = [
 	"Topic :: Software Development :: Libraries :: Python Modules",
 	"Topic :: Utilities",
 ]
-homepage = "https://github.com/FHPythonUtils/waifu2x"
-repository = "https://github.com/FHPythonUtils/waifu2x"
-documentation = "https://github.com/FHPythonUtils/waifu2x/blob/master/README.md"
+homepage = "https://github.com/AgnesRiber/waifu-2025"
+repository = "https://github.com/AgnesRiber/waifu-2025"
+documentation = "https://github.com/AgnesRiber/waifu-2025/blob/master/README.md"
 readme = "README.md"
 
 [tool.poetry.scripts]
