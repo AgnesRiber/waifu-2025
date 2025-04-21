@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "waifu2x-agnes"
+name = "waifu_agnes"
 version = "2024.0.1"
 license = "mit"
 description = "Chainer implementation of waifu2x"
