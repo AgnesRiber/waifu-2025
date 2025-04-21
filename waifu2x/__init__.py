@@ -4,19 +4,16 @@ implementation in Chainer, a deep learning framework, uses neural networks
 to perform the image enhancement tasks.
 """
 
-from __future__ import annotations
-
-import argparse
 import sys
 import time
-from pathlib import Path
-
+import argparse
 import numpy as np
-from chainer.backends import cuda
-from chainer.link import Chain
-from chainer.serializers.npz import load_npz
 from PIL import Image
-
+from pathlib import Path
+from chainer.link import Chain
+from chainer.backends import cuda
+from __future__ import annotations
+from chainer.serializers.npz import load_npz
 from waifu2x import iproc, reconstruct, srcnn, utils
 
 THISDIR = Path(__file__).resolve().parent
